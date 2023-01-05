@@ -14,6 +14,16 @@ class ScanModel: Hashable {
         self.images = images
     }
     
+    init(
+        id: UUID = UUID(),
+        timestamp: Date = Date(),
+        images: [UIImage]
+    ) {
+        self.id = id
+        self.timestamp = timestamp
+        self.images = images
+    }
+    
     static func == (lhs: ScanModel, rhs: ScanModel) -> Bool {
         return lhs.id == rhs.id
     }
