@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5495DC02965EF4600DEFCF5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DBF2965EF4600DEFCF5 /* Common.swift */; };
+		C52975B9296832F200EFAF60 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52975B8296832F200EFAF60 /* InfoView.swift */; };
 		C5495DC22965F3BA00DEFCF5 /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */; };
 		C5495DC52966002600DEFCF5 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DC42966002600DEFCF5 /* UIApplication+Extension.swift */; };
 		C5495DCA2966123600DEFCF5 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DC92966123600DEFCF5 /* ScanModel.swift */; };
@@ -17,11 +17,13 @@
 		C55FFBF12965EC5F004A2290 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C55FFBF02965EC5F004A2290 /* Preview Assets.xcassets */; };
 		C5C4FF6629670C840073CB75 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF6529670C840073CB75 /* String+Extension.swift */; };
 		C5C4FF6829670CAF0073CB75 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF6729670CAF0073CB75 /* UIImage+Extension.swift */; };
+		C5C4FF76296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF74296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld */; };
+		C5C4FF782967374D0073CB75 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF772967374D0073CB75 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C523B7372966FF91007DC5E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		C5495DBF2965EF4600DEFCF5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		C52975B8296832F200EFAF60 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
 		C5495DC42966002600DEFCF5 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		C5495DC92966123600DEFCF5 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 		C55FFBF02965EC5F004A2290 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C5C4FF6529670C840073CB75 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		C5C4FF6729670CAF0073CB75 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		C5C4FF75296735450073CB75 /* ScanModelCodable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScanModelCodable.xcdatamodel; sourceTree = "<group>"; };
+		C5C4FF772967374D0073CB75 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C52975B72968321100EFAF60 /* OverviewModule */ = {
+			isa = PBXGroup;
+			children = (
+				C5495DC32966000C00DEFCF5 /* Extensions */,
+				C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */,
+				C55FFBEB2965EC5D004A2290 /* OverviewView.swift */,
+				C5495DC92966123600DEFCF5 /* ScanModel.swift */,
+			);
+			path = OverviewModule;
+			sourceTree = "<group>";
+		};
+		C52975BA29683F3D00EFAF60 /* InfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				C52975B8296832F200EFAF60 /* InfoView.swift */,
+			);
+			path = InfoModule;
+			sourceTree = "<group>";
+		};
+		C52975BB29683F5700EFAF60 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C5C4FF74296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		C52975BC29683F6200EFAF60 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C55FFBE92965EC5D004A2290 /* RocketScannerApp.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		C5495DC32966000C00DEFCF5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +97,8 @@
 		C5495DC82966010E00DEFCF5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */,
-				C55FFBEB2965EC5D004A2290 /* OverviewView.swift */,
-				C5495DC92966123600DEFCF5 /* ScanModel.swift */,
+				C52975BA29683F3D00EFAF60 /* InfoModule */,
+				C52975B72968321100EFAF60 /* OverviewModule */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -68,6 +106,8 @@
 		C5495DCD29661E2700DEFCF5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				C52975BB29683F5700EFAF60 /* Entity */,
+				C5C4FF772967374D0073CB75 /* DataController.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -91,14 +131,12 @@
 		C55FFBE82965EC5D004A2290 /* RocketScanner */ = {
 			isa = PBXGroup;
 			children = (
+				C52975BC29683F6200EFAF60 /* Common */,
 				C523B7372966FF91007DC5E2 /* Info.plist */,
 				C5495DCD29661E2700DEFCF5 /* Util */,
 				C5495DC82966010E00DEFCF5 /* Modules */,
-				C5495DC32966000C00DEFCF5 /* Extensions */,
-				C55FFBE92965EC5D004A2290 /* RocketScannerApp.swift */,
 				C55FFBED2965EC5F004A2290 /* Assets.xcassets */,
 				C55FFBEF2965EC5F004A2290 /* Preview Content */,
-				C5495DBF2965EF4600DEFCF5 /* Common.swift */,
 			);
 			path = RocketScanner;
 			sourceTree = "<group>";
@@ -183,11 +221,13 @@
 			files = (
 				C55FFBEA2965EC5D004A2290 /* RocketScannerApp.swift in Sources */,
 				C5C4FF6629670C840073CB75 /* String+Extension.swift in Sources */,
-				C5495DC02965EF4600DEFCF5 /* Common.swift in Sources */,
 				C5C4FF6829670CAF0073CB75 /* UIImage+Extension.swift in Sources */,
+				C5C4FF782967374D0073CB75 /* DataController.swift in Sources */,
+				C5C4FF76296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld in Sources */,
 				C55FFBEC2965EC5D004A2290 /* OverviewView.swift in Sources */,
 				C5495DC52966002600DEFCF5 /* UIApplication+Extension.swift in Sources */,
 				C5495DCA2966123600DEFCF5 /* ScanModel.swift in Sources */,
+				C52975B9296832F200EFAF60 /* InfoView.swift in Sources */,
 				C5495DC22965F3BA00DEFCF5 /* OverviewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +431,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C5C4FF74296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C5C4FF75296735450073CB75 /* ScanModelCodable.xcdatamodel */,
+			);
+			currentVersion = C5C4FF75296735450073CB75 /* ScanModelCodable.xcdatamodel */;
+			path = ScanModelCodableEntity.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C55FFBDE2965EC5D004A2290 /* Project object */;
 }

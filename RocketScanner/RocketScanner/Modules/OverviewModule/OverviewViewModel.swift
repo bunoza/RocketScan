@@ -1,13 +1,11 @@
+import CoreData
 import SwiftUI
 import VisionKit
 
 class OverviewViewModel: NSObject, ObservableObject {
-    @Published var errorMessage: String?
-    @Published var scanModels: [ScanModel] = []
     
-    var sortedScanModels: [ScanModel] {
-        scanModels.sorted { $0.timestamp > $1.timestamp }
-    }
+    @Published var errorMessage: String?
+    var didFinishScanning: ((ScanModel) throws -> ())?
     
     func getDocumentCameraViewController() -> VNDocumentCameraViewController {
         let vc = VNDocumentCameraViewController()
@@ -15,19 +13,20 @@ class OverviewViewModel: NSObject, ObservableObject {
         return vc
     }
     
-    func removeScanModel(scanModel: ScanModel) {
-        scanModels.removeAll { $0.id == scanModel.id }
+    func removeScanModel(scanModel: ScanModel, moc: NSManagedObjectContext) {
+        let model = ScanModelCodable(context: moc)
+        model.id = scanModel.id
+        model.timestamp = scanModel.timestamp
+        model.imagesAsBase64 = scanModel.images.map { $0.convertImageToBase64String() }
+        moc.delete(model)
     }
     
-    func removeImage(scanModel: ScanModel, image: UIImage) {
-        if let index = scanModels.firstIndex(of: scanModel) {
-            scanModel.images.removeAll { $0 == image }
-            if scanModel.images.isEmpty {
-                self.scanModels.remove(at: index)
-            } else {
-                self.scanModels[index] = scanModel
-            }
-        }
+    func removeImage(scanModel: ScanModel, image: UIImage, moc: NSManagedObjectContext) {
+        let model = ScanModelCodable(context: moc)
+        model.id = scanModel.id
+        model.timestamp = scanModel.timestamp
+        model.imagesAsBase64 = scanModel.images.filter { $0 != image }.map { $0.convertImageToBase64String() }
+        moc.delete(model)
     }
 }
 
@@ -35,18 +34,23 @@ extension OverviewViewModel: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
-      
+    
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         errorMessage = error.localizedDescription
     }
-      
+    
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-      print("Did Finish With Scan.")
+        print("Did Finish With Scan.")
         var allScanedImages: [UIImage] = []
         for i in 0..<scan.pageCount {
             allScanedImages.append(scan.imageOfPage(at:i))
         }
-        self.scanModels.append(ScanModel(images: allScanedImages))
+        let scanModelTemp = ScanModel(images: allScanedImages)
+        do {
+            try self.didFinishScanning?(scanModelTemp)
+        } catch (let error) {
+            print("Error: \(error)")
+        }
         controller.dismiss(animated: true, completion: nil)
     }
 }
