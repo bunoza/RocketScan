@@ -24,6 +24,14 @@ class ScanModel: Hashable {
         self.images = images
     }
     
+    init(
+        model: ScanModelCodable
+    ) {
+        self.id = model.id ?? UUID()
+        self.timestamp = model.timestamp ?? Date()
+        self.images = model.imagesAsBase64?.map { $0.convertBase64StringToImage() } ?? []
+    }
+    
     static func == (lhs: ScanModel, rhs: ScanModel) -> Bool {
         return lhs.id == rhs.id
     }
