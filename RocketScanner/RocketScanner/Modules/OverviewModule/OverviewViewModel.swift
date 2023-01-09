@@ -1,11 +1,25 @@
+import Combine
 import CoreData
 import SwiftUI
 import VisionKit
 
 class OverviewViewModel: NSObject, ObservableObject {
-    
+    @Published var scanModels: [ScanModelCodable] = []
     @Published var errorMessage: String?
-    var didFinishScanning: ((ScanModel) throws -> ())?
+
+    private var cancellable: AnyCancellable?
+    
+    func onAppear() {
+        cancellable = ScanModelCodableStorage
+            .shared
+            .scanModels
+            .eraseToAnyPublisher()
+            .sink(
+                receiveValue: { scanModels in
+                    self.scanModels = scanModels
+                }
+            )
+    }
     
     func getDocumentCameraViewController() -> VNDocumentCameraViewController {
         let vc = VNDocumentCameraViewController()
@@ -13,20 +27,12 @@ class OverviewViewModel: NSObject, ObservableObject {
         return vc
     }
     
-    func removeScanModel(scanModel: ScanModel, moc: NSManagedObjectContext) {
-        let model = ScanModelCodable(context: moc)
-        model.id = scanModel.id
-        model.timestamp = scanModel.timestamp
-        model.imagesAsBase64 = scanModel.images.map { $0.convertImageToBase64String() }
-        moc.delete(model)
+    func removeScanModel(scanModel: ScanModel) {
+        ScanModelCodableStorage.shared.removeScanModel(scanModel: scanModel)
     }
     
-    func removeImage(scanModel: ScanModel, image: UIImage, moc: NSManagedObjectContext) {
-        let model = ScanModelCodable(context: moc)
-        model.id = scanModel.id
-        model.timestamp = scanModel.timestamp
-        model.imagesAsBase64 = scanModel.images.filter { $0 != image }.map { $0.convertImageToBase64String() }
-        moc.delete(model)
+    func removeImage(scanModel: ScanModel, image: UIImage) {
+        ScanModelCodableStorage.shared.removeImage(scanModel: scanModel, image: image)
     }
 }
 
@@ -46,11 +52,7 @@ extension OverviewViewModel: VNDocumentCameraViewControllerDelegate {
             allScanedImages.append(scan.imageOfPage(at:i))
         }
         let scanModelTemp = ScanModel(images: allScanedImages)
-        do {
-            try self.didFinishScanning?(scanModelTemp)
-        } catch (let error) {
-            print("Error: \(error)")
-        }
+        ScanModelCodableStorage.shared.add(scanModel: scanModelTemp)
         controller.dismiss(animated: true, completion: nil)
     }
 }

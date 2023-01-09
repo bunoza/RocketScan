@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C50FEC97296AFD9000CEB26D /* ScanModelCodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50FEC96296AFD9000CEB26D /* ScanModelCodableStorage.swift */; };
 		C52975B9296832F200EFAF60 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52975B8296832F200EFAF60 /* InfoView.swift */; };
 		C5495DC22965F3BA00DEFCF5 /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */; };
 		C5495DC52966002600DEFCF5 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5495DC42966002600DEFCF5 /* UIApplication+Extension.swift */; };
@@ -18,10 +19,11 @@
 		C5C4FF6629670C840073CB75 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF6529670C840073CB75 /* String+Extension.swift */; };
 		C5C4FF6829670CAF0073CB75 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF6729670CAF0073CB75 /* UIImage+Extension.swift */; };
 		C5C4FF76296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF74296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld */; };
-		C5C4FF782967374D0073CB75 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF772967374D0073CB75 /* DataController.swift */; };
+		C5C4FF782967374D0073CB75 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C4FF772967374D0073CB75 /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C50FEC96296AFD9000CEB26D /* ScanModelCodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModelCodableStorage.swift; sourceTree = "<group>"; };
 		C523B7372966FF91007DC5E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C52975B8296832F200EFAF60 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		C5495DC12965F3BA00DEFCF5 /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
@@ -35,7 +37,7 @@
 		C5C4FF6529670C840073CB75 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		C5C4FF6729670CAF0073CB75 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		C5C4FF75296735450073CB75 /* ScanModelCodable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScanModelCodable.xcdatamodel; sourceTree = "<group>"; };
-		C5C4FF772967374D0073CB75 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		C5C4FF772967374D0073CB75 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				C52975BB29683F5700EFAF60 /* Entity */,
-				C5C4FF772967374D0073CB75 /* DataController.swift */,
+				C5C4FF772967374D0073CB75 /* PersistenceController.swift */,
+				C50FEC96296AFD9000CEB26D /* ScanModelCodableStorage.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -222,12 +225,13 @@
 				C55FFBEA2965EC5D004A2290 /* RocketScannerApp.swift in Sources */,
 				C5C4FF6629670C840073CB75 /* String+Extension.swift in Sources */,
 				C5C4FF6829670CAF0073CB75 /* UIImage+Extension.swift in Sources */,
-				C5C4FF782967374D0073CB75 /* DataController.swift in Sources */,
+				C5C4FF782967374D0073CB75 /* PersistenceController.swift in Sources */,
 				C5C4FF76296735450073CB75 /* ScanModelCodableEntity.xcdatamodeld in Sources */,
 				C55FFBEC2965EC5D004A2290 /* OverviewView.swift in Sources */,
 				C5495DC52966002600DEFCF5 /* UIApplication+Extension.swift in Sources */,
 				C5495DCA2966123600DEFCF5 /* ScanModel.swift in Sources */,
 				C52975B9296832F200EFAF60 /* InfoView.swift in Sources */,
+				C50FEC97296AFD9000CEB26D /* ScanModelCodableStorage.swift in Sources */,
 				C5495DC22965F3BA00DEFCF5 /* OverviewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
