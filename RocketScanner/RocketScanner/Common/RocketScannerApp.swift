@@ -3,7 +3,7 @@ import CoreData
 
 @main
 struct RocketScannerApp: App {
-    @StateObject private var dataController = DataController()
+    @StateObject private var dataController = PersistenceController()
 
     var body: some Scene {
         WindowGroup {

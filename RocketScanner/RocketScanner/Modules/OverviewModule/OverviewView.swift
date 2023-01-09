@@ -3,14 +3,6 @@ import VisionKit
 import CoreData
 
 struct OverviewView: View {
-    @Environment(\.managedObjectContext) var moc
-    
-    @FetchRequest(
-        sortDescriptors: [
-            SortDescriptor(\.timestamp, order: .reverse)
-        ]
-    ) var scanModels: FetchedResults<ScanModelCodable>
-    
     @StateObject private var viewModel: OverviewViewModel
     @State private var showInfoView: Bool = false
     
@@ -24,6 +16,7 @@ struct OverviewView: View {
                 Text(error)
             } else {
                 renderList()
+                    .onAppear { viewModel.onAppear() }
             }
         }
     }
@@ -40,11 +33,7 @@ struct OverviewView: View {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                     Button {
-                        if let model = scanModels.filter({ $0.id == scanModel.id }).first
-                        {
-                            moc.delete(model)
-                            try? moc.save()
-                        }
+                        viewModel.removeScanModel(scanModel: scanModel)
                     } label: {
                         Label("Delete", systemImage: "delete.left")
                     }
@@ -68,20 +57,12 @@ struct OverviewView: View {
                             Label("Share", systemImage: "square.and.arrow.up")
                         }
                         Button {
-                            if let model = scanModels.filter({ $0.id == scanModel.id }).first
-                            {
-                                moc.delete(model)
-                                try? moc.save()
-                            }
+                            viewModel.removeScanModel(scanModel: scanModel)
                         } label: {
                             Label("Delete batch", systemImage: "delete.left")
                         }
                         Button {
-                            if let model = scanModels.filter({ $0.id == scanModel.id }).first
-                            {
-                                model.imagesAsBase64 = scanModel.images.filter { $0 != image }.map { $0.convertImageToBase64String() }
-                                try? moc.save()
-                            }
+                            viewModel.removeImage(scanModel: scanModel, image: image)
                         } label: {
                             Label("Delete", systemImage: "delete.left")
                         }
@@ -94,13 +75,13 @@ struct OverviewView: View {
     
     func renderList() -> some View {
         List() {
-            if scanModels.isEmpty {
+            if viewModel.scanModels.isEmpty {
                 Section {} footer: {
                     Text("To start scanning documents, press + in upper right corner.")
                 }
             } else {
                 ForEach(
-                    scanModels.map {
+                    viewModel.scanModels.map {
                         ScanModel(
                             id: $0.id!,
                             timestamp: $0.timestamp!,
@@ -117,7 +98,10 @@ struct OverviewView: View {
                 }
             }
         }
-        .animation(.easeInOut, value: scanModels.compactMap { $0.imagesAsBase64 })
+        .animation(
+            .easeInOut,
+            value: viewModel.scanModels.compactMap { $0.imagesAsBase64 }
+        )
         .listStyle(.insetGrouped)
         .navigationTitle("Overview")
         .navigationBarTitleDisplayMode(.large)
@@ -139,13 +123,6 @@ struct OverviewView: View {
             trailing:
                 Button(
                     action: {
-                        viewModel.didFinishScanning = { scanModel in
-                            let model = ScanModelCodable(context: moc)
-                            model.id = scanModel.id
-                            model.timestamp = scanModel.timestamp
-                            model.imagesAsBase64 = scanModel.images.map { $0.convertImageToBase64String() }
-                            try moc.save()
-                        }
                         UIApplication.keyWindow?.rootViewController?
                             .present(
                                 viewModel.getDocumentCameraViewController(),

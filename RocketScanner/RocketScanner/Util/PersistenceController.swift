@@ -1,6 +1,8 @@
 import CoreData
 
-class DataController: ObservableObject {
+class PersistenceController: ObservableObject {
+    static let shared = PersistenceController()
+    
     let container = NSPersistentContainer(name: "ScanModelCodableEntity")
     
     init() {
